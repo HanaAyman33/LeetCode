@@ -1,0 +1,25 @@
+import java.util.ArrayList;
+import java.util.List;
+public class PathSum2 {
+	public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> res=new ArrayList<>();
+        List<Integer> ls=new ArrayList<>();
+        helper(root,targetSum,ls,res);
+        return res;
+    }
+
+    void helper(TreeNode root,int sum,List<Integer> ls,List<List<Integer>> res) {
+        if(root==null) return;
+        
+        ls.add(root.val);
+        
+        if(root.val==sum && root.left==null && root.right==null) {
+            res.add(new ArrayList<>(ls));
+        }
+
+
+        helper(root.left,sum-root.val,ls,res);
+        helper(root.right,sum-root.val,ls,res);
+        ls.remove(ls.size()-1);
+    }
+}
